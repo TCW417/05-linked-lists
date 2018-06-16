@@ -1,0 +1,33 @@
+{
+  "name": "05-linked-lists",
+  "version": "1.0.0",
+  "description": "![cf](http://i.imgur.com/7v5ASc8.png) lab 05 - Linked List Data Structure ====",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint . && jest --coverage",
+    "tests": "jest --coverage",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TCW417/05-linked-lists.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TCW417/05-linked-lists/issues"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "dotenv": "^6.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "jest": "^23.1.0"
+  },
+  "homepage": "https://github.com/TCW417/05-linked-lists#readme"
+}
