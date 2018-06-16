@@ -12,7 +12,7 @@ const LinkedList = module.exports = class { /* eslint-disable-line */
   forEach(f) {
     let ptr = this.head;
     while (ptr !== null) {
-      f(ptr);
+      f(ptr.value);
       ptr = ptr.next;
     }
   }
@@ -173,15 +173,71 @@ const LinkedList = module.exports = class { /* eslint-disable-line */
     return list;
   }
 
-  // time: O(1)
+  // time: O(n) worst case because of the need to reposition 
+  // the tail pointer.  Crying out for a DLL.
   // space: O(1) since were not creating any new nodes
   // splice(startPtr [,delete count [, item [, item...]]])
   // if delete count is omitted, list.tail = startPtr
   // if delete count runs off end of list, same as omitting it.
   // items added to list after deletions
-  // splice(startPtr, delCount, ...items) {
-  //   if (this.head === null) return null;
+  splice(startPtr, delCount, ...items) {
+    if (this.head === null) return null;
+    if (startPtr === null) return null;
+    if (!delCount) { // truncate list at startPtr and return remainder
+      if (startPtr === this.head) { // copy list set original to null
+        const lp1 = new LinkedList();
+        this.forEach(x => lp1.push(x));
+        this.head = this.tail = null;
+        return lp1;
+      }
+      // startPtr beyond head
+      const l = new LinkedList();
+      l.head = startPtr;
+      l.tail = this.tail;
+      let p = this.head;
+      while (p.next !== startPtr) p = p.next;
+      this.tail = p;
+      return l;
+    }
 
-  // }
+    // we have a delete count. could be zero. Not going to deal with
+    // negative values at this time.
+    if (delCount < 0) return null;
+
+    // find node that points to strartPtr node
+    let predPtr = this.head;
+    if (startPtr !== this.head) {
+      while (predPtr.next !== null && predPtr.next !== startPtr) {
+        predPtr = predPtr.next;
+      }
+    }
+    // the head has no predecessor node so needs special handling if
+    // splice startPtr = this.head
+    console.log('predPtr', predPtr, 'dc', delCount);
+    if (predPtr === null) return null; // startPtr not in the list! 
+    // predPtr points to node before startPtr
+    const l2 = new LinkedList();
+    console.log('loop');
+    let p = startPtr; // p moves through nodes to be deleted
+    for (let c = 0; c < delCount; c += 1) {
+      console.log('p',p,'c',c);
+      if (p === null) break; // ran off end of list
+      l2.push(p.value);
+      console.log('p.next',p.next);
+      p = p.next; 
+    }
+    if (startPtr === this.head) this.head = predPtr;
+    predPtr.next = p;
+    console.log('done loop');
+    console.log('p', p);
+    console.log('predPtr', predPtr);
+    console.log('l2', l2);
+    console.log('this', JSON.stringify(this, null, 2));
+    // l2 holds deleted values, this has those items removed
+    if (items.length === 0) return l2;
+    // const l2 = new LinkedList();
+    // for (let cnt = 0; cnt < )
+    return null;
+  }
   /* eslint-enable */
 };

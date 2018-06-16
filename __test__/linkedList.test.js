@@ -2,6 +2,9 @@
 
 const LinkedList = require('../model/linkedList');
 
+const clj = (msg, js) => 
+  console.log(msg, JSON.stringify(js, null, 2));
+
 describe('LinkedList class tests', () => {
   let list;
 
@@ -20,6 +23,13 @@ describe('LinkedList class tests', () => {
     expect(ll.tail).toBeNull();
   });
 
+  test('#push test 0, beforeEach', () => {
+    expect(list.head).not.toBeNull();
+    expect(list.tail).not.toBeNull();
+    expect(list.head.value).toEqual(1);
+    expect(list.tail.value).toEqual(3);
+  });
+  
   test('#push test 1', () => {
     list = new LinkedList();
     list.push(1);
@@ -109,11 +119,10 @@ describe('LinkedList class tests', () => {
   });
 
   test('#forEach', () => {
-    list.forEach((n) => {
-      n.value += 10;
-    });
-    expect(list.head.value).toEqual(11);
-    expect(list.tail.value).toEqual(13);
+    const a = [];
+    list.forEach(el => a.push(el + 10));
+    expect(a[0]).toEqual(11);
+    expect(a[2]).toEqual(13);
   });
 
   test('#remove test 1', () => {
@@ -243,4 +252,64 @@ describe('LinkedList class tests', () => {
     expect(nList.head.value).toEqual(2);
     expect(nList.tail.value).toEqual(3);
   });
+
+  /* eslint-disable */
+  test('#splice test 1, no dc, p in middle', () => { 
+    list.push(4, 5);
+    const p = list.find((x => x === 3));
+    const x = list.splice(p);
+    expect(list.tail.value).toEqual(2);
+    expect(x.head.value).toEqual(3);
+    expect(x.tail.value).toEqual(5);
+  });
+
+  test('#splice test 2, no dc, p == tail', () => {
+    list.push(4, 5);
+    const p = list.tail;
+    const x = list.splice(p);
+    expect(list.tail.value).toEqual(4);
+    expect(x.head.value).toEqual(5);
+    expect(x.tail.value).toEqual(5);
+  });
+
+  test('#splice test 3, no dc, p == head', () => {
+    const p = list.head;
+    const x = list.splice(p);
+    expect(list.head).toBeNull();
+    expect(list.tail).toBeNull();
+    expect(x.head.value).toEqual(1);
+    expect(x.tail.value).toEqual(3);
+  });
+
+  test('#splice test 4, dc = 1, p != head', () => { 
+    list.push(4, 5);
+    const p = list.find(x => x === 4);
+    const x = list.splice(p, 1);
+    expect(list.tail.value).toEqual(5);
+    expect(x.head.value).toEqual(4);
+    expect(x.tail.value).toEqual(4);
+  });
+
+  test.only('#splice test 5, dc = 2, p = head', () => { 
+    list.push(4, 5);
+    const p = list.head;
+    const x = list.splice(p, 2);
+    clj('t5, post, list', list);
+    clj('t5, post, return value', x);
+    expect(list.tail.value).toEqual(5);
+    expect(list.head.value).toEqual(3);
+    expect(x.head.value).toEqual(1);
+    expect(x.tail.value).toEqual(2);
+  });
+
+  test('#splice test 6, dc = 3, p = "3"', () => { 
+    list.push(4, 5);
+    const p = list.find(x => x === 3);
+    const x = list.splice(p, 3);
+    expect(list.head.value).toEqual(1);
+    expect(list.tail.value).toEqual(2);
+    expect(x.head.value).toEqual(3);
+    expect(x.tail.value).toEqual(5);
+  });
+
 });
