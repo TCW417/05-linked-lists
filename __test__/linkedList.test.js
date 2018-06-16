@@ -19,26 +19,26 @@ describe('LinkedList class tests', () => {
 
   test('#constructor ensure constructor returns proper object', () => {
     const ll = new LinkedList();
-    expect(ll.head).toBeNull();
+    expect(ll.next).toBeNull();
     expect(ll.tail).toBeNull();
   });
 
   test('#push test 0, beforeEach', () => {
-    expect(list.head).not.toBeNull();
+    expect(list.next).not.toBeNull();
     expect(list.tail).not.toBeNull();
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(3);
   });
   
   test('#push test 1', () => {
     list = new LinkedList();
     list.push(1);
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(1);
   });
 
   test('#push test 2', () => {
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(3);
   });
 
@@ -46,7 +46,7 @@ describe('LinkedList class tests', () => {
     list = new LinkedList();
     const n = list.pop();
     expect(n).toBeNull();
-    expect(list.head).toBeNull();
+    expect(list.next).toBeNull();
     expect(list.tail).toBeNull();
   });
 
@@ -55,7 +55,7 @@ describe('LinkedList class tests', () => {
     list.push(1);
     const n = list.pop();
     expect(n.value).toEqual(1);
-    expect(list.head).toBeNull();
+    expect(list.next).toBeNull();
     expect(list.tail).toBeNull();
   });
 
@@ -65,7 +65,7 @@ describe('LinkedList class tests', () => {
     list.push(2);
     const n = list.pop();
     expect(n.value).toEqual(2);
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(1);
     expect(list.tail.next).toBeNull();
   });
@@ -73,7 +73,7 @@ describe('LinkedList class tests', () => {
   test('#pop test 3', () => {
     const n = list.pop();
     expect(n.value).toEqual(3);
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(2);
     expect(list.tail.next).toBeNull();
   });
@@ -81,13 +81,13 @@ describe('LinkedList class tests', () => {
   test('#unshift test 1', () => {
     list = new LinkedList();
     list.unshift(1);
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(1);
   });
 
   test('#unshift test 2', () => {
     list.unshift(1, 2, 3);
-    expect(list.head.value).toEqual(3);
+    expect(list.next.value).toEqual(3);
     expect(list.tail.value).toEqual(3);
   });
 
@@ -95,7 +95,7 @@ describe('LinkedList class tests', () => {
     list = new LinkedList();
     const n = list.shift();
     expect(n).toBeNull();
-    expect(list.head).toBeNull();
+    expect(list.next).toBeNull();
     expect(list.tail).toBeNull();
   });
 
@@ -105,7 +105,7 @@ describe('LinkedList class tests', () => {
     list.unshift(2);
     const n = list.shift();
     expect(n.value).toEqual(2);
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(1);
     expect(list.tail.next).toBeNull();
   });
@@ -113,7 +113,7 @@ describe('LinkedList class tests', () => {
   test('#shift test 3', () => {
     const n = list.shift();
     expect(n.value).toEqual(1);
-    expect(list.head.value).toEqual(2);
+    expect(list.next.value).toEqual(2);
     expect(list.tail.value).toEqual(3);
     expect(list.tail.next).toBeNull();
   });
@@ -129,7 +129,7 @@ describe('LinkedList class tests', () => {
     list.remove((x) => {
       return x === 1; // head of list
     });
-    expect(list.head.value).toEqual(2);
+    expect(list.next.value).toEqual(2);
     expect(list.tail.value).toEqual(3);
   });
 
@@ -137,7 +137,7 @@ describe('LinkedList class tests', () => {
     list.remove((x) => {
       return x === 2; // head of list
     });
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(3);
   });
 
@@ -145,7 +145,7 @@ describe('LinkedList class tests', () => {
     list.remove((x) => {
       return x === 3; // head of list
     });
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(2);
   });
 
@@ -156,7 +156,7 @@ describe('LinkedList class tests', () => {
     list.remove((x) => {
       return x === 2; // head of list
     });
-    expect(list.head.value).toEqual(3);
+    expect(list.next.value).toEqual(3);
     expect(list.tail.value).toEqual(3);
   });
 
@@ -167,7 +167,7 @@ describe('LinkedList class tests', () => {
     list.remove((x) => {
       return x === 3; // head of list
     });
-    expect(list.head.value).toEqual(1);
+    expect(list.next.value).toEqual(1);
     expect(list.tail.value).toEqual(1);
   });
 
@@ -181,7 +181,7 @@ describe('LinkedList class tests', () => {
     list.remove((x) => {
       return x === 3; // head of list
     });
-    expect(list.head).toBeNull();
+    expect(list.next).toBeNull();
     expect(list.tail).toBeNull();
   });
 
@@ -203,8 +203,8 @@ describe('LinkedList class tests', () => {
     const nList = list.map((n) => {
       return `v: ${n.value}`;
     });
-    expect(nList.head.value).toEqual('v: 1');
-    expect(nList.head.next.value).toEqual('v: 2');
+    expect(nList.next.value).toEqual('v: 1');
+    expect(nList.next.next.value).toEqual('v: 2');
     expect(nList.tail.value).toEqual('v: 3');
   });
 
@@ -215,13 +215,13 @@ describe('LinkedList class tests', () => {
 
   test('#filter test 1', () => {
     const nList = list.filter(x => x >= 2);
-    expect(nList.head.value).toEqual(2);
+    expect(nList.next.value).toEqual(2);
     expect(nList.tail.value).toEqual(3);
   });
 
   test('#filter test 2', () => {
     const nList = list.filter(x => x < 2);
-    expect(nList.head.value).toEqual(1);
+    expect(nList.next.value).toEqual(1);
     expect(nList.tail.value).toEqual(1);
   });
 
@@ -236,20 +236,20 @@ describe('LinkedList class tests', () => {
     expect(p1.value).toEqual(1);
     expect(p2.value).toEqual(2);
     const nList = list.slice(p1, p2);
-    expect(nList.head.value).toEqual(1);
+    expect(nList.next.value).toEqual(1);
     expect(nList.tail.value).toEqual(2);
   });
   
   test('#slice test 2', () => {
     const nList = list.slice();
-    expect(nList.head.value).toEqual(1);
+    expect(nList.next.value).toEqual(1);
     expect(nList.tail.value).toEqual(3);
   });
 
   test('#slice test 3', () => {
     const p1 = list.find(x => x === 2);
     const nList = list.slice(p1);
-    expect(nList.head.value).toEqual(2);
+    expect(nList.next.value).toEqual(2);
     expect(nList.tail.value).toEqual(3);
   });
 
@@ -259,7 +259,7 @@ describe('LinkedList class tests', () => {
     const p = list.find((x => x === 3));
     const x = list.splice(p);
     expect(list.tail.value).toEqual(2);
-    expect(x.head.value).toEqual(3);
+    expect(x.next.value).toEqual(3);
     expect(x.tail.value).toEqual(5);
   });
 
@@ -268,48 +268,95 @@ describe('LinkedList class tests', () => {
     const p = list.tail;
     const x = list.splice(p);
     expect(list.tail.value).toEqual(4);
-    expect(x.head.value).toEqual(5);
+    expect(x.next.value).toEqual(5);
     expect(x.tail.value).toEqual(5);
   });
 
   test('#splice test 3, no dc, p == head', () => {
-    const p = list.head;
+    const p = list.next;
     const x = list.splice(p);
-    expect(list.head).toBeNull();
+    expect(list.next).toBeNull();
     expect(list.tail).toBeNull();
-    expect(x.head.value).toEqual(1);
+    expect(x.next.value).toEqual(1);
     expect(x.tail.value).toEqual(3);
   });
 
   test('#splice test 4, dc = 1, p != head', () => { 
     list.push(4, 5);
-    const p = list.find(x => x === 4);
+    const p = list.find(x => x === 5);
     const x = list.splice(p, 1);
-    expect(list.tail.value).toEqual(5);
-    expect(x.head.value).toEqual(4);
-    expect(x.tail.value).toEqual(4);
-  });
-
-  test.only('#splice test 5, dc = 2, p = head', () => { 
-    list.push(4, 5);
-    const p = list.head;
-    const x = list.splice(p, 2);
-    clj('t5, post, list', list);
-    clj('t5, post, return value', x);
-    expect(list.tail.value).toEqual(5);
-    expect(list.head.value).toEqual(3);
-    expect(x.head.value).toEqual(1);
-    expect(x.tail.value).toEqual(2);
-  });
-
-  test('#splice test 6, dc = 3, p = "3"', () => { 
-    list.push(4, 5);
-    const p = list.find(x => x === 3);
-    const x = list.splice(p, 3);
-    expect(list.head.value).toEqual(1);
-    expect(list.tail.value).toEqual(2);
-    expect(x.head.value).toEqual(3);
+    expect(list.tail.value).toEqual(4);
+    expect(x.next.value).toEqual(5);
     expect(x.tail.value).toEqual(5);
   });
 
+  test('#splice test 5, dc = 2, p = head', () => { 
+    list.push(4, 5);
+    const p = list.next;
+    const x = list.splice(p, 2);
+    expect(list.tail.value).toEqual(5);
+    expect(list.next.value).toEqual(3);
+    expect(x.next.value).toEqual(1);
+    expect(x.tail.value).toEqual(2);
+  });
+
+  test('#splice test 6, dc = 2, p = "3"', () => { 
+    list.push(4, 5);
+    const p = list.find(x => x === 3);
+    const x = list.splice(p, 2);
+    expect(list.next.value).toEqual(1);
+    expect(list.tail.value).toEqual(5);
+    expect(x.next.value).toEqual(3);
+    expect(x.tail.value).toEqual(4);
+  });
+
+  test('#splice test 7, dc = 4, p = "1"', () => { 
+    list.push(4, 5);
+    const p = list.find(x => x === 1);
+    const x = list.splice(p, 4);
+    expect(list.next.value).toEqual(5);
+    expect(list.tail.value).toEqual(5);
+    expect(x.next.value).toEqual(1);
+    expect(x.tail.value).toEqual(4);
+  });  
+  
+  test('#splice test 8, dc = 6, p = "2"', () => { 
+    list.push(4, 5);
+    const p = list.find(x => x === 2);
+    const x = list.splice(p, 6);
+    expect(list.next.value).toEqual(1);
+    expect(list.tail.value).toEqual(1);
+    expect(x.next.value).toEqual(2);
+    expect(x.tail.value).toEqual(5);
+  });
+
+  test('#splice test 9, dc = 0, p = "1", items = [10, 11, 12]', () => {
+    const p = list.splice(list.next, 0, 10, 11, 12);
+    expect(list.tail.value).toEqual(3);
+    expect(list.next.value).toEqual(10);
+  });
+
+  test('#splice test 10, dc = 3, p = "1", items = [10, 11, 12]', () => {
+    // clj('t10 before', list)
+    const p = list.splice(list.next, 3, 10, 11, 12);
+    // clj('t10 after', list);
+    expect(list.tail.value).toEqual(12);
+    expect(list.next.value).toEqual(10);
+  });
+
+  test('#splice test 11, dc = 0, p = "3", items = [10, 11, 12]', () => {
+    // clj('t10 before', list)
+    const p = list.splice(list.tail, 0, 10, 11, 12);
+    // clj('t10 after', list);
+    expect(list.tail.value).toEqual(3);
+    expect(list.next.value).toEqual(1);
+  });
+
+  test('#splice test 12, dc = 1, p = "3", items = [10, 11, 12]', () => {
+    // clj('t10 before', list)
+    const p = list.splice(list.tail, 1, 10, 11, 12);
+    // clj('t10 after', list);
+    expect(list.tail.value).toEqual(12);
+    expect(list.next.value).toEqual(1);
+  });
 });
