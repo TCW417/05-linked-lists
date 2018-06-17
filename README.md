@@ -11,8 +11,12 @@ LinkedList objects are made up from Node objects.  The resulting list is a circu
  * Install node and npm
  * fork and clone, or just clone this repo on GitHub.com: https://github.com/TCW417/05-linked-lists
  * run npm i from the install directory
+
+## Testing
  * see __test__/linkedlist.tests.js for example use of each method
- * run "npm test" to execute all tests
+ * run `npm test` to execute linter and all functional tests.
+ * run `npm run tests` to run just code tests
+ * run `npm lint` to run linter only.
 
 ## Data Structures
 ### Node
@@ -61,6 +65,7 @@ A new list or null if no matching values are found.
 
 ### Notes
 `filter` throws TypeError if callback is not a function.
+
 ---
 ## LinkedList.find()
 The `find()` method returns the value of the first node in the list for which its predicate function returns true. The original list is not modified.
@@ -85,6 +90,7 @@ The fist list value matching the callback function test, or a pointer to its nod
 
 ### Notes
 `find` throws TypeError if callback is not a function. returnNode need only be truthy to invoke the return pointer option.
+
 ---
 ## LinkedList.forEach()
 The `forEach()` method executes a provided callback function on each member of the list. It does not modify the list itself, although the callback function may.
@@ -110,6 +116,7 @@ Returns undefined.
 
 ### Notes
 `forEach` throws TypeError if callback is not a function. 
+
 ---
 ## LinkedList.map()
 The `map()` method returns a new list whose values are the return value of a callback function that is passed the value of each node in the list. The original list is not modified.
@@ -135,6 +142,7 @@ Returns a new list with mapped values.
 
 ### Notes
 `map` throws TypeError if callback is not a function. 
+
 ---
 ## LinkedList.pop()
 The `pop()` method removes the last item in the list and returns its value. The original list is shortened by one node.
@@ -156,6 +164,7 @@ None.
 Returns the value of the last node in the list, whatever type it may be. Returns null if list is empty.
 
 ### Notes
+
 ---
 ## LinkedList.push()
 The `push()` method adds nodes to the end of the list with the given values.
@@ -176,6 +185,7 @@ One or more values to be added to the end of the list.
 None. Undefined.
 
 ### Notes
+
 ---
 ## LinkedList.reduce()
 The `reduce()` method uses a callback to factor the node values in the list down to a single value.
@@ -199,6 +209,7 @@ The accumulated results of the callback on list values.
 
 ### Notes
 Throws TypeError if callback is not a function.
+
 ---
 ## LinkedList.remove()
 The `remove()` method uses a callback determine which node to reove from the list. Removes the first match. Original list is shortened by one.
@@ -220,6 +231,7 @@ The removed value.
 
 ### Notes
 Throws TypeError if callback is not a function.
+
 ---
 ## LinkedList.shift()
 The `shift()` method returns the value of the first node in the list. The node is removed resulting in the original list being shorter by one.
@@ -240,6 +252,7 @@ None.
 The removed value or null if the list is empty.
 
 ### Notes
+
 ---
 ## LinkedList.slice()
 The `slice()` method returns a new list made up of the nodes between the given start and end pointers.
@@ -263,48 +276,51 @@ A new list of nodes.
 
 ### Notes
 slice() makes a shallow copy of the list.  No checking is done to ensure that the pointers in fact point to nodes in the contextual list, nor that startPointer's node occurs before endPointer's.
+
 ---
-"splice", "unshift"]
+## LinkedList.splice()
+The `splice()` method changes a list by removing existing nodes and/or adding new values.
 
+### Sample code
+```
+// Given and existing list of 5 elements, remove 2 
+// nodes starting the referenced location and insert 3 new nodes at the point of deletion.
 
-## To Submit this Assignment
-  * fork this repository and work in a branch called `lab-05`
-  * submit a pull request to your forked repository
-  * Set up Travis CI on your forked repository
-  * submit a link to your PR in canvas
-  * write a question and observation on canvas
+// list = 1 2 3 4 5
+let deletedList = list.splice(list.find(v => v === 2), 2, 9, 10, 11));
+//list now = 1 9 10 11 4 5
+```
+### Syntax
+list.splice(startPointer [, deleteCount [, item1 [,item2...]]]); 
 
-## Requirements  
-#### Configuration  
-  <!-- list of files, configurations, tools, etc that are required -->
-  Your lab directory must include  
-  * **README.md** -- with a documentation about your lab
-  * **.gitignore** -- with a robust .gitignore
-  * **.eslintrc** -- with the class .eslintrc file
-  * **.eslintignore** -- with the class .eslintignore
-  * **.package.json** -- with all dependencies and dev-dependencies
-  * **lib/** -- directory for holding your programs helper modules
-  * **__test__/** -- directory for holding your programs unit and integration tests
+### Parameters
+ * `startPointer` Pointer into list at which to start the splice.
+ * `deleteCount | optional` Number of nodes to delete starting at startPointer. If zero, no nodes are removed. If left off, all nodes to end of list are removed.
+ * `...items | optional` Items (values) to be inserted into the list starting where startPointer's node was (assuming it was deleted).
 
-#### Testing  
-  * write at least two test assertions for each method of your Linked List class
-  * organize your tests into appropriate describe/it blocks for test output readability
+### Return Value
+A new list the deleted nodes.
 
-####  Documentation  
-  * in your README, write documentation for you data structures
-  * your documentation should includes code block examples
-  * provide instructions for:
-    * installing and using your data structure
-    * accessing each method
-    * running your tests
+### Notes
+splice() makes a shallow copy of the list.  No checking is done to ensure that the pointer in fact points to nodes in the contextual list.
 
-#### Feature Tasks  
-  * implement a `LinkedList` class which will use a `Node` class that you have also defined
-  * implement a `pop()` on the LinkedList prototype
-  * implement a `remove(value)` on the prototype
-  * implement `map()` _or_ `reduce()` as pure methods on the LinkedList prototype
-  * in comments above or within each function, note the Big-O time AND space complexity
+---
+## LinkedList.unshift()
+The `unshift()` method adds nodes to the start of the list with the given values.
 
-## Bonus Points (not eligible on resubmits):
-  * 1pt: test your Node class as well with at least two test assertions, one for a successful instantiation and another for unsuccessful instantiation
-  * 2pts: refactor your Linked List class so `pop()` can have a constant / O(1) run time.
+### Sample code
+```
+// Assuming list, add three values to its beginning.
+
+list.unshift('foo', 'bar', 'buz');
+```
+### Syntax
+list.unshift(item [, item [, item...]]); 
+
+### Parameters
+One or more values to be added to the start of the list.
+
+### Return Value
+None. Undefined.
+
+### Notes
