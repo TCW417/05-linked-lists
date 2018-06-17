@@ -95,7 +95,7 @@ const LinkedList = module.exports = class { /* eslint-disable-line */
     }
   }
   
-  // time: O(1), not counting f's contribution
+  // time: O(n), due to call to find method requiring scan of list.
   // space: O(1)
   remove(f) { // remove, return null or removed value
     if (typeof f !== 'function') throw TypeError;
@@ -183,7 +183,7 @@ const LinkedList = module.exports = class { /* eslint-disable-line */
   // could argue for O(1) if you assume the slice is much
   // smaller than the list. 
   // space: O(n) where n is size of slice.
-  // like time, coudl argue for O(1) if the slice is much smaller than the list.
+  // like time, could argue for O(1) if the slice is much smaller than the list.
   slice(pStart = this.next, pEnd = this.prev) { // return new list excluding pEnd.value
     if (this.next === null) return null; // empty list
     // I'm not catching the ase where someone uses pointers that aren't
@@ -202,10 +202,6 @@ const LinkedList = module.exports = class { /* eslint-disable-line */
   // space: O(1) since were not creating any new nodes.
   // or... One might argue for O(n) since it's possible to insert
   // any number of new items into the list. 
-  // splice(startPtr [,delete count [, item [, item...]]])
-  // if delete count is omitted, list.tail = startPtr
-  // if delete count runs off end of list, same as omitting it.
-  // items added to list after deletions
   splice(startPtr, delCount, ...items) {
     const delNode = (dPtr) => {
       dPtr.prev.next = dPtr.next;
