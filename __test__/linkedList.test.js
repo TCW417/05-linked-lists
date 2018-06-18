@@ -485,4 +485,10 @@ describe('LinkedList class tests', () => {
     const p = lst.splice(lst.next, 1, 2, 3, 4);
     expect(p).toBeNull();
   });
+
+  test.only('#toString test 1', () => { /* eslint-disable-line */
+    const lst = new LinkedList();
+    lst.push(1, 2, 3);
+    console.log(lst.toString());
+  });
 });

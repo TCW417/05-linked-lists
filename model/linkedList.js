@@ -249,4 +249,19 @@ const LinkedList = module.exports = class { /* eslint-disable-line */
 
     return returnList; // return new list
   }
+
+  toString(indent = 2) {
+    function recurseOver(ptr, level) {
+      if (!ptr.value) return null;
+      const l = level + 1;
+      // console.log(ptr.value.toString().padStart(l * indent, ' '));
+      // recurseOver(ptr.next, l);
+      // return null;
+      return `{ value: ${ptr.value}\n`.padStart(l * indent, ' ') +
+      `next: ${recurseOver(ptr.next, l)}`.padStart(l * indent, ' ');
+    }
+    if (this.next === null) return null;
+    const level = 0;
+    return recurseOver(this.next, level);
+  }
 };
